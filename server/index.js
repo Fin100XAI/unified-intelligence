@@ -4,8 +4,11 @@
 // ============================================================================
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import * as D from './data.js';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -74,4 +77,12 @@ app.get('/api/meta', (_req, res) =>
   })),
 );
 
-app.listen(PORT, () => console.log(`✅ Governance API (SIMULATED) running on http://localhost:${PORT}`));
+// --- Serve the built frontend (single deployable unit) ------------------------
+// `npm run build` in /client produces client/dist; we serve it here so deploying
+// this Node service serves both the SPA and the API on one port/origin.
+const clientDist = path.join(__dirname, '../client/dist');
+app.use(express.static(clientDist));
+// SPA fallback: any non-API GET returns index.html so client-side routing works.
+app.get(/^(?!\/api\/).*/, (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+
+app.listen(PORT, () => console.log(`✅ Governance Nerve Center running on http://localhost:${PORT}`));
