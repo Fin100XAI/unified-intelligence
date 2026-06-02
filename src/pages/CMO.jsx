@@ -22,7 +22,7 @@ export default function CMO() {
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
             <ShieldCheck size={14} className="text-emerald-500" /> State Governance Health
           </div>
-          <ScoreGauge score={o.governanceHealthScore} size={150} label="Maharashtra" />
+          <ScoreGauge score={o.governanceHealthScore} size={150} label="Maharashtra" color="#1e3a8a" />
           <Badge level={o.governanceHealthScore >= 70 ? 'Medium' : 'High'}>
             {o.governanceHealthScore >= 70 ? 'Stable — Monitor' : 'Needs Attention'}
           </Badge>

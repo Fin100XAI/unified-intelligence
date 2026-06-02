@@ -5,13 +5,13 @@ State Command Center & Governance Intelligence platform (PoC) for CMO, Chief
 Secretary, Principal Secretaries, MahaIT, Divisional Commissioners, District
 Collectors and line departments.
 
-> ⚠️ **All data is SIMULATED for PoC demonstration.** It is **not** real
-> government data and must not be treated as official statistics. Every screen
-> carries a *“Simulated Data for PoC Demonstration”* badge.
+> ⚠️ **Figures are INDICATIVE for PoC demonstration** — grounded in public
+> Maharashtra statistics with modelled estimates. **Not** official government
+> data. Every screen carries an *“Indicative Data”* badge.
 
 ## Tech stack
-- **Frontend:** React 18 + Vite, Tailwind CSS, Recharts, Lucide icons, Framer Motion, React Router
-- **Backend:** Node.js + Express (simulated JSON governance data)
+- **Frontend only (no backend):** React 18 + Vite, Tailwind CSS, Recharts, Lucide icons, Framer Motion, React Router
+- **Data:** generated in-app (`src/data/mock.js`) with a per-minute live drift
 
 ## Features
 - 15 modules: State Command Overview, Department Health, District Governance,
@@ -21,7 +21,7 @@ Collectors and line departments.
 - 10 global filters (division, district, department, scheme, risk, period,
   urban/rural, service category, financial year, priority) — they update every
   card, chart, table and alert live.
-- Dark / light mode, sticky topbar, desktop sidebar, mobile bottom-nav + drawer.
+- Clean white government-grade theme, sticky topbar, desktop sidebar, mobile bottom-nav + drawer.
 - Charts, drilldown modals, searchable / sortable / CSV-exportable tables,
   skeleton loaders, empty + error states, heatmap grids, score gauges.
 - All financial values use ₹ (no `$` anywhere).
@@ -30,44 +30,31 @@ Collectors and line departments.
 
 ## Folder structure
 ```
-governance-intell-poc/
-├─ package.json            # root: runs client + server together
-├─ server/                 # Express API (simulated data)
-│  ├─ index.js             # routes
-│  └─ data.js              # Maharashtra master + synthetic generators
-└─ client/                 # React app
-   └─ src/
-      ├─ api.js            # fetch hook + ₹ formatters
-      ├─ context/          # ThemeContext, FilterContext
-      ├─ components/       # Layout, ui primitives, charts
-      ├─ data/nav.js       # nav + route config
-      └─ pages/            # 15 module pages
+unified-poc/                # single Vite app — no server
+├─ package.json
+├─ index.html
+├─ vite.config.js · tailwind.config.js · postcss.config.js
+├─ dist/                    # production build (npm run build)
+└─ src/
+   ├─ api.js                # in-app data hook + ₹ formatters
+   ├─ data/mock.js          # Maharashtra master data + indicative generators
+   ├─ data/nav.js           # nav + route config
+   ├─ context/              # ThemeContext, FilterContext
+   ├─ components/           # Layout, ui primitives, charts
+   └─ pages/                # 15 module pages
 ```
 
 ## Setup & run
 
 ```bash
-# 1. install everything (root + server + client)
-npm run install:all
-
-# 2. run backend (:4000) and frontend (:5173) together
-npm run dev
+npm install      # install dependencies
+npm run dev      # dev server → http://localhost:5173
+npm run build    # production build → dist/
+npm run preview  # preview the built dist/
 ```
 
-Then open **http://localhost:5173**. The Vite dev server proxies `/api/*` to the
-Express backend on port 4000.
-
-Run individually if preferred:
-```bash
-npm run dev:server   # API only  → http://localhost:4000
-npm run dev:client   # UI only   → http://localhost:5173
-```
-
-## API endpoints (all return `{ _meta: { simulated: true, ... }, data }`)
-`/api/overview` · `/api/departments` · `/api/districts` · `/api/welfare` ·
-`/api/rts` · `/api/mahadbt` · `/api/revenue` · `/api/disaster` ·
-`/api/law-order` · `/api/cyber` · `/api/audit-logs` · `/api/alerts` ·
-`/api/meta` (filter master data) · `/api/health`
+There is no backend — all data is produced client-side in `src/data/mock.js`
+(same contract the pages used before, exposed via `getData(path, params)`).
 
 ## Notes on responsible design
 - **Law & Order** module exposes only governance-safe operational signals — no

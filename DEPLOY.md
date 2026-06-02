@@ -1,33 +1,24 @@
 # Deployment
 
-This app deploys as **one Node service**: the Express server (`/server`) serves
-both the REST API (`/api/*`) and the built React frontend (`client/dist`).
+This is a **static frontend** — no backend, no server. Data is generated
+in-browser (`src/data/mock.js`). Deploy the built `dist/` folder to any static
+host.
 
-## Build + run (any Node host)
+## Build
 
 ```bash
-npm run build      # installs deps + builds client/dist
-npm start          # starts the server, which serves the SPA + API
+npm install
+npm run build      # outputs to dist/
 ```
 
-The server listens on `process.env.PORT` (default `4000`). Open that URL — the
-full dashboard loads, and the frontend calls `/api/*` on the same origin (no
-proxy or separate frontend host needed).
+## Host the `dist/` folder
 
-## Platform settings (Render / Railway / Heroku / etc.)
+- **Netlify / Vercel / Cloudflare Pages:** Build command `npm run build`,
+  output/publish directory `dist`.
+- **GitHub Pages / S3 / any static server:** upload the contents of `dist/`.
+- **Local check:** `npm run preview`.
 
-| Setting        | Value             |
-|----------------|-------------------|
-| Build command  | `npm run build`   |
-| Start command  | `npm start`       |
-| Node version   | 18+               |
-| Health check   | `/api/health`     |
+Because it's a single-page app, configure the host to fall back to
+`index.html` for unknown routes (Netlify/Vercel do this automatically for SPAs).
 
-The platform injects `PORT`; no env vars are required.
-
-## Notes
-- `client/dist` is git-ignored — it's produced by `npm run build` at deploy time.
-  If your host doesn't run a build step, run `npm run build` locally and commit
-  `client/dist` (remove it from `.gitignore` first).
-- Data is generated in-process (no database), grounded in public figures with a
-  per-minute live drift. Restarting the service is safe and stateless.
+No environment variables or database required.

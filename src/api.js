@@ -1,16 +1,6 @@
-// Tiny fetch wrapper + React hook for the governance API.
+// In-app data hook — no backend. Data is generated client-side in data/mock.js.
 import { useEffect, useState } from 'react';
-
-const BASE = '/api';
-
-export async function getJSON(path, params = {}) {
-  const qs = new URLSearchParams(
-    Object.entries(params).filter(([, v]) => v && v !== '' && !['period', 'financialYear'].includes(v)),
-  ).toString();
-  const res = await fetch(`${BASE}${path}${qs ? `?${qs}` : ''}`);
-  if (!res.ok) throw new Error(`API ${path} failed (${res.status})`);
-  return res.json();
-}
+import { getData } from './data/mock.js';
 
 // useApi(path, params) -> { data, meta, loading, error }
 // Auto-refreshes every 30s for a live, real-time dashboard feel.
@@ -20,14 +10,16 @@ export function useApi(path, params = {}) {
   const key = JSON.stringify(params);
   useEffect(() => {
     let alive = true;
-    const load = (initial) => {
-      if (initial) setState((s) => ({ ...s, loading: true, error: null }));
-      getJSON(path, params)
-        .then((json) => alive && setState({ data: json.data, meta: json._meta, loading: false, error: null }))
-        .catch((e) => alive && setState((s) => ({ ...s, loading: false, error: e.message })));
+    const load = () => {
+      try {
+        const { data, _meta } = getData(path, params);
+        if (alive) setState({ data, meta: _meta, loading: false, error: null });
+      } catch (e) {
+        if (alive) setState({ data: null, meta: null, loading: false, error: e.message });
+      }
     };
-    load(true);
-    const id = setInterval(() => load(false), REFRESH_MS);
+    load();
+    const id = setInterval(load, REFRESH_MS);
     return () => { alive = false; clearInterval(id); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, key]);
