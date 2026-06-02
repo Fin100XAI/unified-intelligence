@@ -144,8 +144,8 @@ export const EmptyState = ({ msg = 'No data matches the current filters.' }) => 
 );
 export const ErrorState = ({ msg }) => (
   <Card className="flex flex-col items-center justify-center gap-2 p-10 text-center text-red-400">
-    <AlertTriangle size={36} /><p className="text-sm font-medium">Failed to load data</p>
-    <p className="text-xs text-slate-400">{msg} — is the API running on :4000?</p>
+    <AlertTriangle size={36} /><p className="text-sm font-medium">Unable to render data</p>
+    <p className="text-xs text-slate-400">{msg}</p>
   </Card>
 );
 
