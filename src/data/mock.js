@@ -91,16 +91,24 @@ const buildOverview = (districts, departments) => {
     id: 'ESC-' + r(1000, 9999),
     title: pick(['RTS SLA breach surge', 'DBT disbursement stall', 'Flood readiness gap',
       'Revenue shortfall alert', 'Grievance backlog spike', 'Infra milestone slip']),
-    district: d.district, department: pick(DEPARTMENTS), priority: pick(['Critical', 'High']), ageDays: r(1, 21),
+    district: d.district, department: pick(DEPARTMENTS), priority: pick(['Critical', 'High', 'Medium']), ageDays: r(1, 21),
   })).sort(() => rnd() - 0.5).slice(0, 5);
   return {
-    governanceHealthScore: 72, departmentsMonitored: departments.length, districtsMonitored: districts.length,
-    criticalAlerts: r(28, 64), rtsPending: r(180000, 240000), welfareGapPct: rf(8, 22),
+    governanceHealthScore: r(75, 85), departmentsMonitored: departments.length, districtsMonitored: districts.length,
+    criticalAlerts: r(18, 45), rtsPending: r(180000, 240000), welfareGapPct: rf(8, 18),
     disasterRiskDistricts: districts.filter((d) => d.disasterVulnerability > 65).length,
     revenueCollectionCr: drift(395000, 0.04), revenueTargetCr: 490000, topEscalations: escalations,
+    totalBeneficiariesServed: r(42000000, 48000000),
+    serviceDeliveryScore: rf(78, 92),
+    grievancesResolved: r(850000, 950000),
+    avgResolutionDays: rf(3.2, 6.8, 1),
+    infrastructureProjects: r(285, 320),
+    projectCompletionRate: rf(72, 88),
+    citizenSatisfaction: rf(76, 88),
+    onlineServiceUsage: rf(62, 78),
     deptRanking: departments.map((d) => ({ department: d.department, healthScore: d.healthScore }))
       .sort((a, b) => b.healthScore - a.healthScore),
-    healthTrend: months.map((m) => ({ month: m, score: r(60, 80) })),
+    healthTrend: months.map((m) => ({ month: m, score: r(72, 85) })),
   };
 };
 
@@ -192,18 +200,44 @@ const buildLawOrder = () => ({
 });
 
 const buildCyber = () => ({
-  cyberReadinessScore: r(58, 84), certInAlignmentPct: rf(70, 95), dataProtectionPct: rf(72, 96),
-  explainabilityScore: rf(74, 92), humanInLoopApprovalPct: rf(88, 99),
-  aiModelAuditStatus: pick(['Passed', 'Review Pending', 'Passed']),
-  deptPosture: DEPARTMENTS.map((d) => ({ department: d, postureScore: r(50, 95), openVulns: r(0, 40) })),
-  vulnerabilityAlerts: Array.from({ length: 5 }, () => ({
-    id: 'CVE-' + r(2023, 2026) + '-' + r(1000, 9999), severity: pick(RISK),
-    department: pick(DEPARTMENTS), status: pick(['Open', 'Patching', 'Mitigated']),
+  cyberReadinessScore: r(72, 88), certInAlignmentPct: rf(78, 96), dataProtectionPct: rf(82, 98),
+  explainabilityScore: rf(80, 94), humanInLoopApprovalPct: rf(92, 99),
+  aiModelAuditStatus: pick(['Passed', 'Review Pending', 'Passed', 'Passed']),
+  incidentResponseTime: rf(0.5, 3.2, 1) + ' hours',
+  securityTrainingCompletion: rf(85, 99) + '%',
+  encryptionCoverage: rf(96, 100) + '%',
+  penetrationTestScore: rf(78, 92) + '%',
+  systemsSecured: r(180, 240),
+  threatsDetected: r(15, 85),
+  deptPosture: DEPARTMENTS.map((d) => ({
+    department: d,
+    postureScore: r(65, 95),
+    openVulns: r(0, 25),
+    criticalVulns: r(0, 8),
+    patchedThisMonth: r(5, 35),
+    complianceStatus: pick(['Compliant', 'Minor Issues', 'Compliant', 'At Risk']),
   })),
-  accessLogs: Array.from({ length: 6 }, () => ({
-    id: 'RBAC-' + r(1000, 9999), role: pick(['District Collector', 'Principal Secretary', 'MahaIT Admin', 'Divisional Commissioner']),
-    action: pick(['Viewed dashboard', 'Exported report', 'Approved recommendation', 'Accessed audit log']),
-    time: r(1, 59) + ' min ago',
+  vulnerabilityAlerts: Array.from({ length: 8 }, () => ({
+    id: 'CVE-' + r(2023, 2026) + '-' + r(1000, 9999),
+    severity: pick(RISK),
+    department: pick(DEPARTMENTS),
+    status: pick(['Open', 'Patching', 'Mitigated', 'Monitoring']),
+    discoveryDate: r(1, 45) + ' days ago',
+    patchAvailable: pick([true, true, false, true]),
+  })),
+  accessLogs: Array.from({ length: 10 }, () => ({
+    id: 'RBAC-' + r(1000, 9999),
+    role: pick(['District Collector', 'Principal Secretary', 'MahaIT Admin', 'Divisional Commissioner', 'IT Security Officer']),
+    action: pick(['Viewed dashboard', 'Exported report', 'Approved recommendation', 'Accessed audit log', 'Modified access policy']),
+    time: r(1, 120) + ' min ago',
+    status: pick(['Success', 'Success', 'Failed Attempt', 'Success']),
+  })),
+  securityIncidents: Array.from({ length: 4 }, () => ({
+    id: 'INC-' + r(1000, 9999),
+    type: pick(['Phishing attempt', 'Unauthorized access', 'Data exfiltration', 'Configuration drift']),
+    date: r(1, 30) + ' days ago',
+    resolution: pick(['Contained', 'Resolved', 'Escalated']),
+    severity: pick(['High', 'Medium', 'Medium']),
   })),
 });
 

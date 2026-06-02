@@ -46,16 +46,16 @@ export const Card = ({ children, className = '', as: As = 'div', ...rest }) => (
 
 // --- Section header -----------------------------------------------------------
 export const PageHeader = ({ title, subtitle, icon: Icon, right }) => (
-  <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-    <div className="flex items-start gap-3">
+  <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex items-start gap-4">
       {Icon && (
-        <div className="rounded-xl bg-gradient-to-br from-navy-600 to-saffron/70 p-2.5 text-white shadow-lg">
-          <Icon size={22} />
+        <div className="rounded-xl bg-gradient-blue p-3 text-white shadow-light-glow">
+          <Icon size={24} />
         </div>
       )}
       <div>
-        <h1 className="text-xl font-extrabold tracking-tight sm:text-2xl">{title}</h1>
-        {subtitle && <p className="text-sm text-slate-500 dark:text-slate-400">{subtitle}</p>}
+        <h1 className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent sm:text-3xl">{title}</h1>
+        {subtitle && <p className="text-sm text-slate-600 dark:text-slate-400 mt-1.5">{subtitle}</p>}
       </div>
     </div>
     <div className="flex items-center gap-2">{right}<SimBadge /></div>
@@ -65,20 +65,21 @@ export const PageHeader = ({ title, subtitle, icon: Icon, right }) => (
 // --- KPI card -----------------------------------------------------------------
 export const Kpi = ({ label, value, sub, icon: Icon, trend, accent = 'navy', onClick }) => {
   const accents = {
-    navy: 'from-navy-600/20 to-navy-700/5 text-navy-600 dark:text-blue-300',
-    saffron: 'from-saffron/20 to-saffron/5 text-saffron',
-    green: 'from-emerald-500/20 to-emerald-500/5 text-emerald-500',
-    gold: 'from-gold/20 to-gold/5 text-gold',
-    red: 'from-red-500/20 to-red-500/5 text-red-500',
+    navy: 'from-blue-600/15 to-blue-700/5 text-blue-600 dark:text-blue-300',
+    saffron: 'from-blue-500/15 to-blue-500/5 text-blue-500',
+    skyblue: 'from-cyan-500/15 to-cyan-500/5 text-cyan-500',
+    green: 'from-emerald-500/15 to-emerald-500/5 text-emerald-500',
+    gold: 'from-cyan-400/15 to-cyan-400/5 text-cyan-500',
+    red: 'from-red-500/15 to-red-500/5 text-red-500',
   };
   return (
-    <Card className={`p-4 ${onClick ? 'cursor-pointer transition hover:-translate-y-0.5 hover:shadow-xl' : ''}`}>
-      <div onClick={onClick} className="flex items-start justify-between gap-2">
+    <Card className={`p-4 hover:shadow-light-glow transition ${onClick ? 'cursor-pointer hover:-translate-y-0.5' : ''}`}>
+      <div onClick={onClick} className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="truncate text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</p>
-          <p className="mt-1 text-2xl font-extrabold tracking-tight">{value}</p>
+          <p className="truncate text-xs font-medium uppercase tracking-wide text-slate-600 dark:text-slate-400">{label}</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight">{value}</p>
           {sub && (
-            <p className={`mt-1 flex items-center gap-1 text-xs ${trend > 0 ? 'text-emerald-500' : trend < 0 ? 'text-red-500' : 'text-slate-400'}`}>
+            <p className={`mt-1.5 flex items-center gap-1 text-xs font-medium ${trend > 0 ? 'text-emerald-600' : trend < 0 ? 'text-red-600' : 'text-slate-500'}`}>
               {trend > 0 ? <TrendingUp size={13} /> : trend < 0 ? <TrendingDown size={13} /> : null}{sub}
             </p>
           )}
