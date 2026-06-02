@@ -57,12 +57,12 @@ export default function Secretary() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ChartCard title={`${d.department} — 12-Month Health Trend`} height={300}>
-          <Lines data={d.trend} x="month" lines={[{ key: 'score', name: 'Health Score', color: '#2563eb' }]} />
+          <Lines data={d.trend} x="month" lines={[{ key: 'score', name: 'Health Score', color: '#4285F4' }]} />
         </ChartCard>
         <ChartCard title="Department vs State Average" subtitle="Benchmark across key metrics" height={300}>
           <Bars data={benchmark} x="metric" bars={[
-            { key: 'dept', name: d.department, color: '#0ea5e9' },
-            { key: 'state', name: 'State Avg', color: '#2563eb' },
+            { key: 'dept', name: d.department, color: '#4285F4' },
+            { key: 'state', name: 'State Avg', color: '#FBBC05' },
           ]} />
         </ChartCard>
       </div>

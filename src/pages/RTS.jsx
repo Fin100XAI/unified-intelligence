@@ -26,8 +26,8 @@ export default function RTS() {
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ChartCard title="Department-wise Backlog vs Breaches" height={320}>
           <Bars data={byDept} x="department" bars={[
-            { key: 'backlog', name: 'Backlog', color: '#0ea5e9' },
-            { key: 'breached', name: 'Breached', color: '#ef4444' },
+            { key: 'backlog', name: 'Backlog', color: '#4285F4' },
+            { key: 'breached', name: 'Breached', color: '#EA4335' },
           ]} vertical />
         </ChartCard>
         <Card className="p-4">

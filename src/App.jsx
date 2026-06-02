@@ -17,6 +17,8 @@ import Audit from './pages/Audit.jsx';
 import Collector from './pages/Collector.jsx';
 import Secretary from './pages/Secretary.jsx';
 import CMO from './pages/CMO.jsx';
+import CMBrief from './pages/CMBrief.jsx';
+import CMPriority from './pages/CMPriority.jsx';
 
 export default function App() {
   return (
@@ -37,10 +39,12 @@ export default function App() {
         <Route path="/collector" element={<Collector />} />
         <Route path="/secretary" element={<Secretary />} />
         <Route path="/cmo" element={<CMO />} />
+        <Route path="/cm-brief" element={<CMBrief />} />
+        <Route path="/cm-priority" element={<CMPriority />} />
       </Routes>
       <div className="mt-6"><TrustBar /></div>
       <footer className="mt-4 pb-2 text-center text-[11px] text-slate-400">
-        Maharashtra State Governance Nerve Center · PoC · Figures are <b>indicative</b> — grounded in public data with modelled estimates; not official government data.
+        CM Governance Intelligence War Room · PoC · Figures are <b>indicative</b> — grounded in public data with modelled estimates; not official government data.
       </footer>
     </Layout>
   );

@@ -30,7 +30,7 @@ export default function LawOrder() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ChartCard title="Escalation Trend (12 months)" height={300}>
-          <Lines data={data.escalationTrend} x="month" lines={[{ key: 'escalations', name: 'Escalations', color: '#ef4444' }]} />
+          <Lines data={data.escalationTrend} x="month" lines={[{ key: 'escalations', name: 'Escalations', color: '#EA4335' }]} />
         </ChartCard>
         <Card className="p-4">
           <h3 className="mb-3 text-sm font-bold">High-Priority Administrative Alerts</h3>

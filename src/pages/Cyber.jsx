@@ -21,7 +21,7 @@ export default function Cyber() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
         <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 flex flex-col items-center justify-center p-6">
           <p className="text-xs font-semibold uppercase text-slate-500 mb-3">Security Posture</p>
-          <ScoreGauge score={data.cyberReadinessScore} label="Readiness" color="#0284c7" />
+          <ScoreGauge score={data.cyberReadinessScore} label="Readiness" color="#4285F4" />
           <p className="text-xs text-slate-500 mt-3">{healthyDepts}/{data.deptPosture.length} Departments Secure</p>
         </Card>
         
@@ -43,8 +43,8 @@ export default function Cyber() {
       <div className="mt-4">
         <ChartCard title="Department Security Posture" subtitle="Posture score vs vulnerabilities" height={340}>
           <Bars data={posture} x="department" bars={[
-            { key: 'postureScore', name: 'Security Score', color: '#0284c7' },
-            { key: 'openVulns', name: 'Open Vulns', color: '#ef4444' },
+            { key: 'postureScore', name: 'Security Score', color: '#4285F4' },
+            { key: 'openVulns', name: 'Open Vulns', color: '#EA4335' },
           ]} vertical />
         </ChartCard>
       </div>

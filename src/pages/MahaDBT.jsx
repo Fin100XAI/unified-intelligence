@@ -31,8 +31,8 @@ export default function MahaDBT() {
       <div className="mt-4">
         <ChartCard title="Scheme-wise DBT Flow (₹ Cr)" subtitle="Disbursed vs pending" height={340}>
           <Bars data={flow} x="scheme" bars={[
-            { key: 'disbursedCr', name: 'Disbursed (₹Cr)', color: '#10b981' },
-            { key: 'pendingCr', name: 'Pending (₹Cr)', color: '#0ea5e9' },
+            { key: 'disbursedCr', name: 'Disbursed (₹Cr)', color: '#4285F4' },
+            { key: 'pendingCr', name: 'Pending (₹Cr)', color: '#FBBC05' },
           ]} vertical />
         </ChartCard>
       </div>

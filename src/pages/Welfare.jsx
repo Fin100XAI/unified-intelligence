@@ -37,12 +37,12 @@ export default function Welfare() {
 
           <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
             <ChartCard title="Welfare Delivery Funnel" subtitle="Eligible → Recipients" height={300}>
-              <Bars data={funnel} x="name" bars={[{ key: 'value', name: 'Citizens', color: '#10b981' }]} />
+              <Bars data={funnel} x="name" bars={[{ key: 'value', name: 'Citizens', color: '#4285F4' }]} />
             </ChartCard>
             <ChartCard title="Scheme-wise Eligible vs Approved" height={300}>
               <Bars data={schemes} x="scheme" bars={[
-                { key: 'eligible', name: 'Eligible', color: '#2563eb' },
-                { key: 'approved', name: 'Approved', color: '#0ea5e9' },
+                { key: 'eligible', name: 'Eligible', color: '#4285F4' },
+                { key: 'approved', name: 'Approved', color: '#FBBC05' },
               ]} vertical />
             </ChartCard>
           </div>

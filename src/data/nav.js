@@ -1,24 +1,26 @@
 import {
   LayoutDashboard, Building2, MapPinned, HeartHandshake, FileClock, Banknote,
   TrendingUp, CloudRain, ShieldAlert, HardHat, ShieldCheck, ScrollText,
-  UserCog, Briefcase, Crown,
+  UserCog, Briefcase, Crown, Newspaper, Activity, ListChecks,
 } from 'lucide-react';
 
 // Single source of truth for routing + sidebar + mobile nav.
 export const NAV = [
   { group: 'Command', items: [
     { path: '/', label: 'State Command', icon: LayoutDashboard },
-    { path: '/cmo', label: 'CMO / CS Executive', icon: Crown },
+    { path: '/cmo', label: 'CMO Executive View', icon: Crown },
+    { path: '/cm-brief', label: 'CM Daily Brief', icon: Newspaper },
+    { path: '/cm-priority', label: 'CM Priority Tracker', icon: ListChecks },
   ]},
   { group: 'Intelligence', items: [
+    { path: '/revenue', label: 'Revenue & Fiscal', icon: TrendingUp },
+    { path: '/law-order', label: 'Law & Order', icon: ShieldAlert },
     { path: '/departments', label: 'Department Health', icon: Building2 },
     { path: '/districts', label: 'District Governance', icon: MapPinned },
-    { path: '/welfare', label: 'Welfare Delivery', icon: HeartHandshake },
-    { path: '/rts', label: 'RTS / Aaple Sarkar', icon: FileClock },
+    { path: '/welfare', label: 'Welfare Assurance', icon: HeartHandshake },
+    { path: '/rts', label: 'Citizen Service (RTS)', icon: FileClock },
     { path: '/mahadbt', label: 'MahaDBT Assurance', icon: Banknote },
-    { path: '/revenue', label: 'Revenue & Fiscal', icon: TrendingUp },
     { path: '/disaster', label: 'Disaster & Resilience', icon: CloudRain },
-    { path: '/law-order', label: 'Law & Order', icon: ShieldAlert },
     { path: '/infrastructure', label: 'Infrastructure', icon: HardHat },
   ]},
   { group: 'Trust & Audit', items: [
@@ -36,8 +38,8 @@ export const ROUTES = NAV.flatMap((g) => g.items);
 
 // Bottom-nav (mobile) — 5 most-used.
 export const MOBILE_NAV = [
-  ROUTES[0], // command
-  { path: '/departments', label: 'Depts', icon: Building2 },
+  ROUTES[0],
+  { path: '/cm-brief', label: 'Daily Brief', icon: Newspaper },
   { path: '/districts', label: 'Districts', icon: MapPinned },
   { path: '/welfare', label: 'Welfare', icon: HeartHandshake },
   { path: '/audit', label: 'Audit', icon: ScrollText },

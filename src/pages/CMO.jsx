@@ -24,7 +24,7 @@ export default function CMO() {
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
             <ShieldCheck size={16} className="text-blue-600" /> State Governance Health
           </div>
-          <ScoreGauge score={o.governanceHealthScore} size={160} label="Maharashtra" color="#0284c7" />
+          <ScoreGauge score={o.governanceHealthScore} size={160} label="Maharashtra" color="#4285F4" />
           <Badge level={o.governanceHealthScore >= 75 ? 'Low' : 'Medium'}>
             {o.governanceHealthScore >= 75 ? '✓ Excellent · On Track' : 'Monitor Closely'}
           </Badge>
@@ -57,7 +57,7 @@ export default function CMO() {
           <AreaTrend data={o.healthTrend} x="month" y="score" />
         </ChartCard>
         <ChartCard title="Department Health Ranking" height={280} subtitle="Top performers">
-          <Bars data={o.deptRanking.slice(0, 8)} x="department" bars={[{ key: 'healthScore', name: 'Health Score', color: '#0284c7' }]} vertical />
+          <Bars data={o.deptRanking.slice(0, 8)} x="department" bars={[{ key: 'healthScore', name: 'Health Score', color: '#4285F4' }]} vertical />
         </ChartCard>
       </div>
 

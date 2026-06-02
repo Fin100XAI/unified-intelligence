@@ -38,7 +38,7 @@ export default function Infrastructure() {
 
       <div className="mt-4">
         <ChartCard title="Infrastructure Delay Prediction — Top 8 At-Risk" height={340}>
-          <Bars data={topRisk} x="project" bars={[{ key: 'delayRisk', name: 'Delay Risk %', color: '#0ea5e9' }]} vertical />
+          <Bars data={topRisk} x="project" bars={[{ key: 'delayRisk', name: 'Delay Risk %', color: '#EA4335' }]} vertical />
         </ChartCard>
       </div>
       <div className="mt-4">

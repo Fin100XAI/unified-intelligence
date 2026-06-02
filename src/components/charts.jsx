@@ -31,15 +31,26 @@ export function Responsive({ height = 280, children }) {
   );
 }
 
-export const PALETTE = ['#0ea5e9', '#2563eb', '#10b981', '#f59e0b', '#6366f1', '#ef4444', '#06b6d4', '#a855f7'];
+// Google brand colors — ordered for best chart combinations
+export const PALETTE = [
+  '#4285F4', // Google Blue      — primary / positive
+  '#EA4335', // Google Red       — risk / breach / danger
+  '#FBBC05', // Google Yellow    — secondary / pending / comparison
+  '#1A73E8', // Google Dark Blue — 4th series if needed
+  '#FF6D00', // Material Orange  — 5th
+  '#00BCD4', // Material Cyan    — 6th
+  '#9C27B0', // Material Purple  — 7th
+  '#00897B', // Material Teal    — 8th
+];
 
-const grid = 'rgba(120,130,160,0.15)';
+const grid = 'rgba(120,130,160,0.12)';
 const tip = {
   contentStyle: {
-    background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: 12, color: '#fff', fontSize: 12,
+    background: '#ffffff', border: '1px solid #e2e8f0',
+    borderRadius: 10, color: '#1e293b', fontSize: 12,
+    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
   },
-  cursor: { fill: 'rgba(37,99,235,0.08)' },
+  cursor: { fill: 'rgba(66,133,244,0.06)' },
 };
 
 export const ChartCard = ({ title, subtitle, children, right, height = 280, className = '' }) => (
@@ -55,7 +66,7 @@ export const ChartCard = ({ title, subtitle, children, right, height = 280, clas
   </Card>
 );
 
-export const AreaTrend = ({ data, x, y, color = PALETTE[0], ...dim }) => (
+export const AreaTrend = ({ data, x, y, color = '#4285F4', ...dim }) => (
   <AreaChart {...dim} data={data} margin={{ top: 5, right: 8, left: -18, bottom: 0 }}>
     <defs>
       <linearGradient id={`g-${y}`} x1="0" y1="0" x2="0" y2="1">
@@ -110,7 +121,7 @@ export const Donut = ({ data, nameKey = 'name', valueKey = 'value', ...dim }) =>
   </PieChart>
 );
 
-export const RadarChartView = ({ data, dataKey = 'value', angleKey = 'subject', color = PALETTE[0], ...dim }) => (
+export const RadarChartView = ({ data, dataKey = 'value', angleKey = 'subject', color = '#4285F4', ...dim }) => (
   <RadarChart {...dim} data={data} cx="50%" cy="50%" outerRadius="75%">
     <PolarGrid stroke={grid} />
     <PolarAngleAxis dataKey={angleKey} tick={{ fontSize: 11, fill: '#94a3b8' }} />

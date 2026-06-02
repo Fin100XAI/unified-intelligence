@@ -25,7 +25,7 @@ export default function Disaster() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ChartCard title="Multi-Hazard Risk Profile" subtitle="Flood · Heatwave · Drought · Coastal · Urban flooding" height={320}>
-          <RadarChartView data={radar} color="#ef4444" />
+          <RadarChartView data={radar} color="#EA4335" />
         </ChartCard>
         <Card className="p-4">
           <div className="mb-3 flex items-center gap-2"><AlertTriangle size={16} className="text-red-500" /><h3 className="text-sm font-bold">Early Warning Alert Panel</h3></div>
