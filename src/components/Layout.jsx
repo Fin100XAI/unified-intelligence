@@ -12,17 +12,16 @@ function ScrollToTop() {
 }
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, X, Bell, SlidersHorizontal, RotateCcw, ShieldCheck, Radio,
+  Menu, X, Bell, SlidersHorizontal, RotateCcw, Radio,
 } from 'lucide-react';
 import { NAV, MOBILE_NAV } from '../data/nav.js';
 import { useFilters } from '../context/FilterContext.jsx';
 import { useApi } from '../api.js';
 import { SimBadge } from './ui.jsx';
+import logo from '../unifiedlogo.jpeg';
 
 const Seal = () => (
-  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-500 text-white shadow-md ring-2 ring-blue-100">
-    <ShieldCheck size={20} />
-  </div>
+  <img src={logo} alt="Unified Governance" className="h-10 w-auto max-w-[88px] shrink-0 rounded-xl object-cover shadow-sm ring-1 ring-slate-200" />
 );
 
 function LiveClock() {
